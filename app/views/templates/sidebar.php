@@ -38,7 +38,7 @@
                               else: echo 'text-dark';
                               endif; ?>" href="<?= BASEURL ?>klasifikasi">
             <i class="fas fa-code-branch"></i>
-            Proses Pelatihan</a>
+            Pelatihan Model RF</a>
         </li>
 
         <li class="nav-item pb-2">

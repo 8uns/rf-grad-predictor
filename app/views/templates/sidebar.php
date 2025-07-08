@@ -34,9 +34,9 @@
           </li> -->
 
         <li class="nav-item pb-2">
-          <a class="nav-link  <?php if ($data['judul'] == 'klasifikasi') : echo 'active';
-                              else: echo 'text-dark';
-                              endif; ?>" href="<?= BASEURL ?>klasifikasi">
+          <a id="gunakanModelLink" class="nav-link  <?php if ($data['judul'] == 'klasifikasi') : echo 'active';
+                                                    else: echo 'text-dark';
+                                                    endif; ?>" href="<?= BASEURL ?>klasifikasi">
             <i class="fas fa-code-branch"></i>
             Pelatihan Model RF</a>
         </li>
@@ -48,6 +48,7 @@
             <i class="fas fa-brain"></i>
             Gunakan Model</a>
         </li>
+
 
 
 
@@ -71,6 +72,15 @@
         </li>
 
       </ul>
+
     </div>
   </div>
 </div>
+
+
+<div id="fullPageLoader" class="loader-overlay hidden">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">Memuat...</div>
+</div>
+
+<p id="statusMessage" style="text-align: center; margin-top: 20px;"></p>

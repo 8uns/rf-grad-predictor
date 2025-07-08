@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?= BASEURL ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= BASEURL ?>css/fontawesome/css/all.css">
 
+    <script src="<?= BASEURL ?>js/script.js"></script>
     <script src="<?= BASEURL ?>js/jquery-3.6.0.min.js"></script>
     <script src="<?= BASEURL ?>js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="<?= BASEURL ?>css/jquery.dataTables.min.css">

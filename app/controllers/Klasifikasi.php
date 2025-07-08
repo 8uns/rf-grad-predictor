@@ -18,12 +18,13 @@ class Klasifikasi extends Controller
         // $this->view('templates/foot');
 
     }
-    public function hasil()
+    public function hasil($execution_time)
     {
         $data['judul'] = 'klasifikasi';
         $data['mhs'] = $this->model('Mhs_model')->getAllmhsLimit();
         $data['totalmhs'] = $this->model('Mhs_model')->getTotalMhs();
         $data['jsonResult'] = $this->model('Klasifikasi_model')->getResultJson();
+        $data['execution_time'] = $execution_time;
 
         $this->view('templates/head', $data);
         $this->view('templates/header', $data);

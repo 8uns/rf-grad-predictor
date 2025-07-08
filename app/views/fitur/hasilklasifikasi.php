@@ -28,6 +28,85 @@
     <div class="row justify-content-end">
         <div class="col-9">
 
+            <div class="row">
+
+                <div class="col-4 text-center">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Pembuatan Model Latih</h5>
+                            <hr>
+                            <div class="row justify-content-md-center">
+                                <div class="col-8">
+                                    <br>
+                                    <h1>
+                                        <strong>
+                                            <?= $data['jsonResult']['modelinfo'] == true ? '<i class="fas fa-check-circle text-primary"></i>' : '<i class="fas fa-times-circle text-danger"></i>' ?>
+
+                                        </strong>
+                                    </h1>
+                                    <h6 class="fw-bold">
+                                        <?= $data['jsonResult']['modelinfo'] == true ? "Model Telah Berhasil Dibuat" : "Model Telah Gagal Dibuat" ?>
+                                    </h6>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 text-center">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Lama Proses Keseluruhan</h5>
+                            <hr>
+                            <div class="row justify-content-md-center">
+                                <div class="col-8">
+                                    <br>
+                                    <h1>
+                                        <strong>
+                                            <i class="fas fa-hourglass-half text-warning"></i>
+                                        </strong>
+                                    </h1>
+                                    <h5 class="fw-bold">
+                                        <?= $data['execution_time'] . " detik" ?>
+                                    </h5>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 text-center">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Lama Proses Pelatihan</h5>
+                            <hr>
+                            <div class="row justify-content-md-center">
+                                <div class="col-8">
+                                    <br>
+                                    <h1>
+                                        <strong>
+                                            <i class="fas fa-stopwatch text-danger"></i>
+                                        </strong>
+                                    </h1>
+                                    <h5 class="fw-bold">
+                                        <?= $data['jsonResult']['execution_time'] . " detik" ?>
+                                    </h5>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <br>
+
 
             <div class="row">
                 <div class="col text-center">
@@ -322,7 +401,7 @@
                                         <tbody>
 
                                             <?php
-                                            foreach ($data['jsonResult']['y']['target'] as $key => $val): ?>
+                                            foreach ($data['jsonResult']['y_labels'] as $key => $val): ?>
                                                 <tr>
 
                                                     <td><?= $key ?></td>

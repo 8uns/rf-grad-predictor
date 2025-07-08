@@ -1,4 +1,9 @@
 {
+    "y_labels": {
+        "0": "MEMUASKAN",
+        "1": "SANGAT MEMUASKAN",
+        "2": "TERPUJI"
+    },
     "X": [
         {
             "prodi": 7,
@@ -35101,15 +35106,9 @@
             "lama_studi": 15
         }
     ],
-    "y": {
-        "target": {
-            "0": "MEMUASKAN",
-            "1": "SANGAT MEMUASKAN",
-            "2": "TERPUJI"
-        }
-    },
     "lenXtrain": 1170,
     "lenXtest": 780,
+    "modelinfo": true,
     "accuracy": 1.0,
     "cm": [
         [
@@ -35128,5 +35127,6 @@
             257
         ]
     ],
-    "report": "              precision    recall  f1-score   support\n\n           0       1.00      1.00      1.00       254\n           1       1.00      1.00      1.00       269\n           2       1.00      1.00      1.00       257\n\n    accuracy                           1.00       780\n   macro avg       1.00      1.00      1.00       780\nweighted avg       1.00      1.00      1.00       780\n"
+    "report": "              precision    recall  f1-score   support\n\n           0       1.00      1.00      1.00       254\n           1       1.00      1.00      1.00       269\n           2       1.00      1.00      1.00       257\n\n    accuracy                           1.00       780\n   macro avg       1.00      1.00      1.00       780\nweighted avg       1.00      1.00      1.00       780\n",
+    "execution_time": 0.5516
 }

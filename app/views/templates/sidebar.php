@@ -63,11 +63,11 @@
         </li>
 
         <li class="nav-item pb-2">
-          <a class="nav-link  <?php if ($data['judul'] == 'perangkingan') : echo 'active';
+          <a class="nav-link  <?php if ($data['judul'] == 'logout') : echo 'active';
                               else: echo 'text-dark';
-                              endif; ?>" href="<?= BASEURL ?>perangkingan">
+                              endif; ?>" href="<?= BASEURL ?>logout/logout">
             <i class="fas fa-sign-out-alt"></i>
-            Keluar</a>
+            Logout</a>
         </li>
 
       </ul>

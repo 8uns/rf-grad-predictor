@@ -19,7 +19,7 @@
         <!-- </div> -->
         <div class="col-5">
             <h3 class="border-bottom mb-4"><strong>
-                    <img src="<?= BASEURL . 'img/logo.png' ?>" alt="" width="8%">
+                    <img class="mb-1" src="<?= BASEURL . 'img/logo.png' ?>" alt="" width="8%">
                     <!-- <i class="fab fa-keycdn"></i>  -->
                     Login System</strong></h3>
             <form action="login/loggedin/admin" method="post">

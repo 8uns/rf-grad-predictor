@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark mb-5">
     <div class="container">
 
-        <a class="navbar-brand text-light" href="<?= BASEURL ?>">
+        <a class="navbar-brand text-light align-middle" href="<?= BASEURL ?>">
             <strong>
-                <img src="<?= BASEURL . 'img/logo.png' ?>" alt="" width="5%">
+                <img class="mb-1" src="<?= BASEURL . 'img/logo.png' ?>" alt="" width="4%">
                 RF
             </strong>. Klasifikasi Predikat Kelulusan
 

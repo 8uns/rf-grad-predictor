@@ -31,4 +31,14 @@ class Klasifikasi extends Controller
         $this->view('templates/sidebar', $data);
         $this->view('fitur/hasilklasifikasi', $data);
     }
+
+    public function prediksi()
+    {
+        $data['judul'] = 'prediksi';
+
+        $this->view('templates/head', $data);
+        $this->view('templates/header', $data);
+        $this->view('templates/sidebar', $data);
+        $this->view('fitur/formprediksi', $data);
+    }
 }

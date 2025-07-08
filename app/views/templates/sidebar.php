@@ -42,9 +42,9 @@
         </li>
 
         <li class="nav-item pb-2">
-          <a class="nav-link  <?php if ($data['judul'] == 'modellatih') : echo 'active';
+          <a class="nav-link  <?php if ($data['judul'] == 'prediksi') : echo 'active';
                               else: echo 'text-dark';
-                              endif; ?>" href="<?= BASEURL ?>">
+                              endif; ?>" href="<?= BASEURL ?>klasifikasi/prediksi">
             <i class="fas fa-brain"></i>
             Gunakan Model</a>
         </li>

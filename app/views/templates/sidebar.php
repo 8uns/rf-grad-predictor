@@ -37,8 +37,16 @@
           <a class="nav-link  <?php if ($data['judul'] == 'klasifikasi') : echo 'active';
                               else: echo 'text-dark';
                               endif; ?>" href="<?= BASEURL ?>klasifikasi">
-            <i class="fas fa-history"></i>
-            Proses Klasifikasi</a>
+            <i class="fas fa-code-branch"></i>
+            Proses Pelatihan</a>
+        </li>
+
+        <li class="nav-item pb-2">
+          <a class="nav-link  <?php if ($data['judul'] == 'modellatih') : echo 'active';
+                              else: echo 'text-dark';
+                              endif; ?>" href="<?= BASEURL ?>">
+            <i class="fas fa-brain"></i>
+            Gunakan Model</a>
         </li>
 
 

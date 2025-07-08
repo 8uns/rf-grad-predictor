@@ -1,4 +1,4 @@
-# 📌 Import library yang diperlukan
+# Import library yang diperlukan
 
 import sys
 import json
@@ -42,7 +42,7 @@ dataReturn = dict()
 
 # print('<br> <br>')
 
-# 📌 1. Membaca dataset dari file JSON
+# 1. Membaca dataset dari file JSON
 file_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json'  # Sesuaikan dengan lokasi file
 with open(file_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
@@ -51,7 +51,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
 df = pd.DataFrame(data)
 
 
-# 📌 2. Melihat 5 data pertama
+# 2. Melihat 5 data pertama
 # print("Data Awal:")
 # print(df.head())
 # dataReturn['head'] = df.head()
@@ -61,7 +61,7 @@ if 'lama_studi' in df.columns:
     df['lama_studi'] = df['lama_studi'].str.strip() # <<< Pastikan baris ini aktif dan berjalan!
 
 
-# 📌 3. Cek informasi dataset
+# 3. Cek informasi dataset
 # print("\nInformasi dataset:")
 # print(df.info())
 # print('<br> <br>')
@@ -72,7 +72,7 @@ if 'lama_studi' in df.columns:
 target_column = "predikat"  # Sesuaikan dengan nama kolom target
 
 
-# 📌 4. Pisahkan fitur (X) dan target (y)
+# 4. Pisahkan fitur (X) dan target (y)
 X = df.drop(columns=[target_column])  # Fitur (semua kolom kecuali target)
 y = df[target_column]  # Target atau label
 
@@ -80,7 +80,7 @@ y = df[target_column]  # Target atau label
 # print('<br> <br>')
 
 
-# # 📌 5. Mengubah data kategorikal menjadi angka
+# # 5. Mengubah data kategorikal menjadi angka
 # label_mappings = {}
 # for column in X.columns:
 #     if X[column].dtype == 'object':  # Jika kolom adalah tipe string (object)
@@ -93,7 +93,7 @@ y = df[target_column]  # Target atau label
 #     y = le.fit_transform(y)
 #     label_mappings['target'] = {index: label for index, label in enumerate(le.classes_)}
 
-# 📌 5. Mengubah data kategorikal menjadi angka
+# 5. Mengubah data kategorikal menjadi angka
 label_encoders = {} # Kita akan menyimpan semua LabelEncoder di sini
 for column in X.columns:
     if X[column].dtype == 'object':  # Jika kolom adalah tipe string (object)
@@ -136,7 +136,7 @@ dataReturn['X'] = X.to_dict(orient='records')
 # dataReturn['y'] = label_encoders
 
 
-# 📌 6. Membagi data menjadi data latih dan data uji (60% latih, 40% uji)
+# 6. Membagi data menjadi data latih dan data uji (60% latih, 40% uji)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
 # print('total Xtrain: ')
@@ -153,14 +153,14 @@ dataReturn['lenXtrain'] = len(X_train)
 dataReturn['lenXtest'] = len(X_test)
 
 
-# 📌 7. Membuat model Random Forest
+# 7. Membuat model Random Forest
 model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
 
-# 📌 8. Melatih model dengan data latih
+# 8. Melatih model dengan data latih
 model.fit(X_train, y_train)
 
 
-# 📌 9. Menyimpan model Random Forest dan LabelEncoders
+# 9. Menyimpan model Random Forest dan LabelEncoders
 model_save_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/random_forest_model.pkl'
 encoders_save_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/label_encoders.pkl'
 
@@ -176,17 +176,17 @@ except Exception as e:
 
 
 
-# 📌 10. Memprediksi data uji
+# 10. Memprediksi data uji
 y_pred = model.predict(X_test)
 
 
-# 📌 11. akurasi skore
+# 11. akurasi skore
 accuracy = accuracy_score(y_test, y_pred)
 # print(f"\nAkurasi Model Random Forest: {accuracy:.2f}")
 dataReturn['accuracy'] = accuracy
 
 
-# 📌 12. Jumlah prediksi benar dan salah
+# 12. Jumlah prediksi benar dan salah
 cm = confusion_matrix(y_test, y_pred)
 # print("\nConfusion Matrix:")
 # print('confusion matrix')
@@ -194,7 +194,7 @@ cm = confusion_matrix(y_test, y_pred)
 dataReturn['cm'] = cm.tolist()
 
 
-# 📌 13. Classification Report
+# 13. Classification Report
 report = classification_report(y_test, y_pred)
 # print("\nClassification Report:")
 # print(report)

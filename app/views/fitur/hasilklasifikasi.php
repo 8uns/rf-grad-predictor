@@ -33,7 +33,7 @@
                 <div class="col-4 text-center">
                     <div class="card" style="width: 100%;">
                         <div class="card-body">
-                            <h5 class="card-title">Pembuatan Model Latih</h5>
+                            <h5 class="card-title">Model Latih</h5>
                             <hr>
                             <div class="row justify-content-md-center">
                                 <div class="col-8">
@@ -58,7 +58,7 @@
                 <div class="col-4 text-center">
                     <div class="card" style="width: 100%;">
                         <div class="card-body">
-                            <h5 class="card-title">Lama Proses Keseluruhan</h5>
+                            <h5 class="card-title">Proses Keseluruhan</h5>
                             <hr>
                             <div class="row justify-content-md-center">
                                 <div class="col-8">
@@ -82,14 +82,14 @@
                 <div class="col-4 text-center">
                     <div class="card" style="width: 100%;">
                         <div class="card-body">
-                            <h5 class="card-title">Lama Proses Pelatihan</h5>
+                            <h5 class="card-title">Proses Pelatihan</h5>
                             <hr>
                             <div class="row justify-content-md-center">
                                 <div class="col-8">
                                     <br>
                                     <h1>
                                         <strong>
-                                            <i class="fas fa-stopwatch text-danger"></i>
+                                            <i class="fas fa-stopwatch text-success"></i>
                                         </strong>
                                     </h1>
                                     <h5 class="fw-bold">

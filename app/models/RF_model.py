@@ -1,5 +1,4 @@
 # Import library yang diperlukan
-
 import sys
 import json
 import pandas as pd
@@ -9,9 +8,10 @@ from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
-from sklearn.preprocessing import LabelEncoder
+# from sklearn.preprocessing import LabelEncoder # Baris ini duplikat, bisa dihapus
 import joblib # Import library joblib
 import time
+import re # Tambahkan import ini untuk regular expression
 
 start_total_time = time.perf_counter()
 
@@ -20,7 +20,7 @@ start_total_time = time.perf_counter()
 # tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json'
 # if len(tempFile) < 2:
 if len(sys.argv) < 2:
-    print("Error: No file argument provided  <br>")
+    print("Error: No file argument provided <br>")
     sys.exit(1)
 
 # Baca data dari file JSON
@@ -60,6 +60,32 @@ df = pd.DataFrame(data)
 if 'lama_studi' in df.columns:
     df['lama_studi'] = df['lama_studi'].str.strip() # <<< Pastikan baris ini aktif dan berjalan!
 
+    # --- START: Penambahan kode untuk mengkonversi 'lama_studi' ke total bulan ---
+    def convert_lama_studi_to_months(lama_studi_str):
+        # Tangani nilai NaN atau string kosong
+        if pd.isna(lama_studi_str) or str(lama_studi_str).strip() == '':
+            return 0 # Atau None, tergantung bagaimana Anda ingin menangani data hilang
+
+        lama_studi_str = str(lama_studi_str).strip() # Pastikan ini string
+
+        tahun = 0
+        bulan = 0
+
+        # Cari pola "X Tahun"
+        match_tahun = re.search(r'(\d+)\s*Tahun', lama_studi_str, re.IGNORECASE)
+        if match_tahun:
+            tahun = int(match_tahun.group(1))
+
+        # Cari pola "Y Bulan"
+        match_bulan = re.search(r'(\d+)\s*Bulan', lama_studi_str, re.IGNORECASE)
+        if match_bulan:
+            bulan = int(match_bulan.group(1))
+
+        return (tahun * 12) + bulan
+
+    df['lama_studi'] = df['lama_studi'].apply(convert_lama_studi_to_months)
+    # --- END: Penambahan kode untuk mengkonversi 'lama_studi' ke total bulan ---
+
 
 # 3. Cek informasi dataset
 # print("\nInformasi dataset:")
@@ -80,23 +106,12 @@ y = df[target_column]  # Target atau label
 # print('<br> <br>')
 
 
-# # 5. Mengubah data kategorikal menjadi angka
-# label_mappings = {}
-# for column in X.columns:
-#     if X[column].dtype == 'object':  # Jika kolom adalah tipe string (object)
-#         le = LabelEncoder()
-#         X[column] = le.fit_transform(X[column])
-
-# # Cek apakah target (y) juga berupa string
-# if y.dtype == 'object':
-#     le = LabelEncoder()
-#     y = le.fit_transform(y)
-#     label_mappings['target'] = {index: label for index, label in enumerate(le.classes_)}
-
 # 5. Mengubah data kategorikal menjadi angka
 label_encoders = {} # Kita akan menyimpan semua LabelEncoder di sini
 for column in X.columns:
-    if X[column].dtype == 'object':  # Jika kolom adalah tipe string (object)
+    # Hanya lakukan Label Encoding untuk kolom bertipe 'object' (string)
+    # Kolom 'lama_studi' sekarang sudah menjadi int/float, jadi tidak akan masuk sini
+    if X[column].dtype == 'object':
         le = LabelEncoder()
         # Fit LabelEncoder ke SELURUH data kolom (tidak hanya X_train)
         # Ini penting agar encoder mengetahui semua kategori yang mungkin
@@ -124,16 +139,6 @@ dataReturn['X'] = X.to_dict(orient='records')
 # Ini adalah mapping label encoder untuk setiap kolom fitur
 # dataReturn['feature_label_mappings'] = {col: list(le.classes_) for col, le in label_encoders.items() if col != 'target'}
 # dataReturn['target_label_mapping'] = {idx: label for idx, label in enumerate(label_encoders['target'].classes_)}
-
-
-# # Melihat label
-# print("Mapping LabelEncoder:")
-# for index, label in enumerate(le.classes_):
-#     print(f"{index} → {label}")
-
-# Konversi label mapping ke JSON
-# dataReturn['y'] = label_mappings
-# dataReturn['y'] = label_encoders
 
 
 # 6. Membagi data menjadi data latih dan data uji (60% latih, 40% uji)

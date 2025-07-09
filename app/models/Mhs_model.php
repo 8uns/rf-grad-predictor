@@ -75,6 +75,14 @@ class Mhs_model
         return $this->db->resultSet();
     }
 
+    public function getProdi()
+    {
+        $this->db->query(
+            "SELECT DISTINCT prodi FROM `mhs`"
+        );
+        return $this->db->resultSet();
+    }
+
 
 
 

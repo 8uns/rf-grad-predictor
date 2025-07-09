@@ -2,34 +2,10 @@ import sys
 import json
 import pandas as pd
 import joblib # Untuk memuat model dan encoders
-import re # Tambahkan import ini untuk regular expression
 
 # --- KONFIGURASI PATH ---
 MODEL_PATH = 'C:/xampp/htdocs/rf.kelulusan/public/file/random_forest_model.pkl'
 ENCODERS_PATH = 'C:/xampp/htdocs/rf.kelulusan/public/file/label_encoders.pkl'
-
-# --- Fungsi Pembantu untuk Konversi Lama Studi ---
-# Fungsi ini harus sama persis dengan yang digunakan saat melatih model
-def convert_lama_studi_to_months(lama_studi_str):
-    if pd.isna(lama_studi_str) or str(lama_studi_str).strip() == '':
-        return 0 # Atau sesuai dengan penanganan data hilang saat pelatihan
-
-    lama_studi_str = str(lama_studi_str).strip()
-
-    tahun = 0
-    bulan = 0
-
-    match_tahun = re.search(r'(\d+)\s*Tahun', lama_studi_str, re.IGNORECASE)
-    if match_tahun:
-        tahun = int(match_tahun.group(1))
-
-    match_bulan = re.search(r'(\d+)\s*Bulan', lama_studi_str, re.IGNORECASE)
-    if match_bulan:
-        bulan = int(match_bulan.group(1))
-
-    return (tahun * 12) + bulan
-# --- Akhir Fungsi Pembantu ---
-
 
 def predict_single_data(input_data_dict):
     """
@@ -54,14 +30,9 @@ def predict_single_data(input_data_dict):
         # Ini adalah langkah KRUSIAL untuk memastikan data baru diubah sama persis dengan data pelatihan.
         processed_input_data = input_data_dict.copy()
 
-        # Konversi 'lama_studi' menjadi total bulan terlebih dahulu
-        if 'lama_studi' in processed_input_data:
-            processed_input_data['lama_studi'] = convert_lama_studi_to_months(processed_input_data['lama_studi'])
-        else:
-            # Jika 'lama_studi' tidak ada di input, pertimbangkan nilai default atau penanganan error
-            # Untuk konsistensi dengan pelatihan, bisa diisi 0 jika diasumsikan belum ada lama studi
-            processed_input_data['lama_studi'] = 0 # Sesuaikan ini jika ada penanganan lain saat pelatihan
-
+        # Membersihkan spasi ekstra dari kolom 'lama_studi'
+        if 'lama_studi' in processed_input_data and isinstance(processed_input_data['lama_studi'], str):
+            processed_input_data['lama_studi'] = processed_input_data['lama_studi'].strip()
 
         # Mengubah kolom IPK menjadi numerik dan mengisi string kosong ("") dengan 0.0
         ipk_columns = [f'ip_s{i}' for i in range(1, 14)] # ip_s1 sampai ip_s13
@@ -77,19 +48,12 @@ def predict_single_data(input_data_dict):
 
         # 3. Konversi input_data_dict yang sudah diproses ke DataFrame Pandas
         # Kunci dictionary harus match dengan kolom yang diharapkan model.
-        # Pastikan urutan kolom sesuai dengan saat model dilatih!
-        # Ambil daftar kolom dari model (atau dari X_train saat pelatihan)
-        model_features = model.feature_names_in_ # Ini adalah cara yang lebih baik untuk mendapatkan urutan kolom
         input_df = pd.DataFrame([processed_input_data])
-        # Reindex DataFrame untuk memastikan urutan kolom sama dengan model yang dilatih
-        input_df = input_df.reindex(columns=model_features, fill_value=0) # Gunakan fill_value jika ada kolom yang hilang
-
 
         # 4. Pra-proses Data Baru menggunakan Label Encoders yang Dimuat
         # Hanya encode kolom yang bertipe 'object' (string) dan ada di LabelEncoders
         for column in input_df.columns:
             # Periksa apakah ada LabelEncoder untuk kolom ini (dan bukan untuk target, karena target adalah output)
-            # Dan pastikan kolom tersebut bertipe 'object' (string)
             if column in label_encoders and column != 'target' and input_df[column].dtype == 'object':
                 le = label_encoders[column] # Ambil LabelEncoder yang sesuai
 
@@ -99,7 +63,7 @@ def predict_single_data(input_data_dict):
                 except ValueError as e:
                     # Ini terjadi jika ada kategori yang belum pernah dilihat oleh LabelEncoder saat pelatihan.
                     return {"error": f"Nilai tidak dikenal untuk kolom kategorikal '{column}': '{processed_input_data[column]}'. Detail: {e}"}
-            # Kolom numerik (termasuk 'lama_studi' dan IPK) tidak perlu di-encode lagi.
+            # Kolom numerik (setelah pra-pemrosesan IPK) tidak perlu di-encode.
 
         # 5. Prediksi Menggunakan Model yang Sudah Dimuat
         prediction_encoded = model.predict(input_df)
@@ -131,11 +95,11 @@ if __name__ == "__main__":
         # Baca konten JSON dari file
         with open(json_file_path, 'r') as f:
             input_json_str = f.read()
-
+        
         input_data = json.loads(input_json_str) # Sekarang coba muat string JSON dari file
-
+        
         result = predict_single_data(input_data)
-
+        
         print(json.dumps(result))
 
     except FileNotFoundError:

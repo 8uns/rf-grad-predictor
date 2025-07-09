@@ -105,11 +105,11 @@ class Klasifikasi_model
         }
 
         // --- DEBUGGING: Tampilkan string JSON yang telah disimpan ---
-        echo "<h3>Debugging Informasi:</h3>";
-        echo "<strong>1. String JSON yang disimpan ke file:</strong><br>";
-        echo "<pre>" . htmlspecialchars($jsonEncodedData) . "</pre><br>";
-        echo "<strong>2. Jalur file JSON sementara:</strong><br>";
-        echo "<pre>" . htmlspecialchars($tempFile) . "</pre><br>";
+        // echo "<h3>Debugging Informasi:</h3>";
+        // echo "<strong>1. String JSON yang disimpan ke file:</strong><br>";
+        // echo "<pre>" . htmlspecialchars($jsonEncodedData) . "</pre><br>";
+        // echo "<strong>2. Jalur file JSON sementara:</strong><br>";
+        // echo "<pre>" . htmlspecialchars($tempFile) . "</pre><br>";
 
 
         // Jalur ke executable Python dan skrip Python Anda
@@ -124,24 +124,27 @@ class Klasifikasi_model
         $commandPython = $pythonExecutable . ' ' . $pythonScript . ' ' . $escapedFilePathArgument;
 
         // --- DEBUGGING: Tampilkan perintah lengkap yang akan dieksekusi ---
-        echo "<strong>3. Perintah lengkap yang dieksekusi:</strong><br>";
-        echo "<pre>" . htmlspecialchars($commandPython) . "</pre><br>";
+        // echo "<strong>3. Perintah lengkap yang dieksekusi:</strong><br>";
+        // echo "<pre>" . htmlspecialchars($commandPython) . "</pre><br>";
 
         // Eksekusi perintah Python
         $output = shell_exec($commandPython);
 
         // --- DEBUGGING: Tampilkan output mentah dari Python ---
-        echo "<strong>4. Output mentah dari Python:</strong><br>";
-        echo "<pre>" . htmlspecialchars($output) . "</pre><br>";
+        // echo "<strong>4. Output mentah dari Python:</strong><br>";
+        // echo "<pre>" . htmlspecialchars($output) . "</pre><br>";
 
         // Coba decode output Python untuk melihat apakah itu JSON yang valid
         $decodedOutput = json_decode($output, true);
-        echo "<strong>5. Output Python (decoded JSON):</strong><br>";
-        if (json_last_error() === JSON_ERROR_NONE) {
-            echo "<pre>" . htmlspecialchars(json_encode($decodedOutput, JSON_PRETTY_PRINT)) . "</pre>";
-        } else {
-            echo "<pre>Tidak dapat mendekode output Python sebagai JSON. Error: " . json_last_error_msg() . "</pre>";
-        }
+        $data = $decodedOutput;
+        // echo "<strong>5. Output Python (decoded JSON):</strong><br>";
+        // if (json_last_error() === JSON_ERROR_NONE) {
+        //     echo "<pre>" . htmlspecialchars(json_encode($decodedOutput, JSON_PRETTY_PRINT)) . "</pre>";
+        //     // $data = htmlspecialchars(json_encode($decodedOutput, JSON_PRETTY_PRINT));
+
+        // } else {
+        //     echo "<pre>Tidak dapat mendekode output Python sebagai JSON. Error: " . json_last_error_msg() . "</pre>";
+        // }
 
         // Opsional: Hapus file sementara setelah digunakan
         // unlink($tempFile);
@@ -149,5 +152,6 @@ class Klasifikasi_model
         // Anda mungkin ingin mengarahkan pengguna setelah prediksi
         // header('Location: ' . BASEURL . 'klasifikasi/hasil/' . $execution_time);
         // exit();
+        return $data;
     }
 }

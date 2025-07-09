@@ -45,15 +45,16 @@ class Klasifikasi extends Controller
 
     public function prosesprediksi()
     {
-        $data['judul'] = 'prosesprediksi';
+        $data['judul'] = 'prediksi';
         $data['prodi'] = $this->model('Mhs_model')->getProdi();
 
-        print_r($this->model('Klasifikasi_model')->predictFrom($_POST));
+        $data['mhs'] = $_POST;
+        $data['prediction'] = $this->model('Klasifikasi_model')->predictFrom($_POST);
 
-        // $this->view('templates/head', $data);
-        // $this->view('templates/header', $data);
-        // $this->view('templates/sidebar', $data);
-        // $this->view('fitur/formprediksi', $data);
+        $this->view('templates/head', $data);
+        $this->view('templates/header', $data);
+        $this->view('templates/sidebar', $data);
+        $this->view('fitur/hasilprediksi', $data);
         // print_r($_POST);
     }
 }

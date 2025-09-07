@@ -1,8 +1,8 @@
 <?php
-define('BASEURL', 'http://localhost/rf.kelulusan/public/');
+define('BASEURL', 'http://localhost/rf-grad-predictor/public/');
 
-// DB
+    // DB
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_USER', 'admin');
+define('DB_PASS', '#admin*');
 define('DB_NAME', 'rf_kelulusan');

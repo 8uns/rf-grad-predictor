@@ -20,7 +20,8 @@ class Klasifikasi_model
         $this->db->close();
 
         // Simpan ke file JSON sementara
-        $tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json';
+        // $tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json';
+        $tempFile = '/var/www/html/rf-grad-predictor/public/file/data.json';
         file_put_contents($tempFile, $data);
         // echo $tempFile;
 
@@ -33,8 +34,9 @@ class Klasifikasi_model
         // echo $tempFile;
         // echo '<br>';
 
-        // $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py';
-        $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py ' . escapeshellarg($tempFile);
+        // $commandPython = '   ';
+        // $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py ' . escapeshellarg($tempFile);
+        $commandPython = 'python3.13 /var/www/html/rf-grad-predictor/app/models/RF_model.py ' . escapeshellarg($tempFile);
         // $output = shell_exec($commandPython);
         shell_exec($commandPython);
 
@@ -50,7 +52,8 @@ class Klasifikasi_model
     public function getResultJson()
     {
         // Read the JSON file
-        $json = file_get_contents('C:/xampp/htdocs/rf.kelulusan/public/file/dataReturn.json');
+        // $json = file_get_contents('C:/xampp/htdocs/rf.kelulusan/public/file/dataReturn.json');
+        $json = file_get_contents('/var/www/html/rf-grad-predictor/public/file/dataReturn.json');
 
         // Check if the file was read successfully
         if ($json === false) {
@@ -73,7 +76,8 @@ class Klasifikasi_model
     public function predictFrom($data)
     {
         // Path ke file JSON sementara
-        $tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/dataPredict.json';
+        // $tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/dataPredict.json';
+        $tempFile = '/var/www/html/rf-grad-predictor/public/file/dataPredict.json';
 
         // Siapkan data dari input form sesuai format JSON yang diinginkan
         $dataToPredict = [
@@ -113,8 +117,10 @@ class Klasifikasi_model
 
 
         // Jalur ke executable Python dan skrip Python Anda
-        $pythonExecutable = 'C:\Users\nabu\AppData\Local\Programs\Python\Python313\python.exe';
-        $pythonScript = 'C:\xampp\htdocs\rf.kelulusan\app\models\Predict_rf_model.py';
+        // $pythonExecutable = 'C:\Users\nabu\AppData\Local\Programs\Python\Python313\python.exe';
+        $pythonExecutable = 'python3.13';
+        // $pythonScript = 'C:\xampp\htdocs\rf.kelulusan\app\models\Predict_rf_model.py';
+        $pythonScript = '/var/www/html/rf-grad-predictor/app/models/Predict_rf_model.py';
 
         // Meneruskan jalur file JSON sebagai argumen ke skrip Python
         // Gunakan escapeshellarg untuk memastikan jalur file ditangani dengan benar oleh shell

@@ -35108,6 +35108,7 @@
     ],
     "lenXtrain": 1170,
     "lenXtest": 780,
+    "tree_visualization_url": "file/visualisasi_pohon.png",
     "modelinfo": true,
     "accuracy": 1.0,
     "cm": [
@@ -35128,5 +35129,5 @@
         ]
     ],
     "report": "              precision    recall  f1-score   support\n\n           0       1.00      1.00      1.00       254\n           1       1.00      1.00      1.00       269\n           2       1.00      1.00      1.00       257\n\n    accuracy                           1.00       780\n   macro avg       1.00      1.00      1.00       780\nweighted avg       1.00      1.00      1.00       780\n",
-    "execution_time": 0.4646
+    "execution_time": 2.3687
 }

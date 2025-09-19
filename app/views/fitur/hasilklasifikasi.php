@@ -422,6 +422,27 @@
             <br>
 
 
+            <div class="row">
+                <div class="col text-center">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Plot Visualisasi</h5>
+                            <hr>
+                            <div class="row justify-content-md-center">
+                                <div class="col table-responsive">
+                                    <h2>
+                                        <img width="100%" src="<?= BASEURL . $data['jsonResult']['tree_visualization_url'] ?>" alt="">
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+
 
             <div class="row">
                 <div class="col text-center">
@@ -432,7 +453,8 @@
                             <div class="row justify-content-md-center">
                                 <div class="col table-responsive">
                                     <h2>
-                                        1.0 (100%)
+                                        <?php $accuracy_integer = (int) $data['jsonResult']['accuracy'] ?>
+                                        <?= $accuracy_integer . "(" . ($accuracy_integer * 100 / 1) . "%)" ?>
                                     </h2>
                                 </div>
                             </div>

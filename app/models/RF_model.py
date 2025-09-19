@@ -12,6 +12,8 @@ from sklearn.metrics import classification_report
 import joblib # Import library joblib
 import time
 import re # Tambahkan import ini untuk regular expression
+import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
 
 start_total_time = time.perf_counter()
 
@@ -163,6 +165,45 @@ model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
 
 # 8. Melatih model dengan data latih
 model.fit(X_train, y_train)
+
+# --- KODE UNTUK MENYIMPAN VISUALISASI POHON ---
+try:
+    # Ambil nama fitur dari kolom X
+    feature_names = X.columns.tolist()
+    # Ambil nama target/kelas dari label encoder
+    target_names = label_encoders['target'].classes_.tolist()
+
+    # Siapkan area plot
+    fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(20,10), dpi=300)
+
+    # Gambar pohon pertama (model.estimators_[0])
+    plot_tree(model.estimators_[0],
+              feature_names=feature_names,
+              class_names=target_names,
+              filled=True,
+              rounded=True,
+              fontsize=8) # Ukuran font bisa disesuaikan
+
+    # Tentukan path dan nama file untuk menyimpan gambar
+    # Pastikan folder 'file' dapat ditulisi oleh server Anda
+    image_save_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/visualisasi_pohon.png'
+
+    # Simpan gambar ke file, bukan menampilkannya
+    plt.savefig(image_save_path, bbox_inches='tight')
+    plt.close(fig) # Penting untuk melepaskan memori setelah menyimpan
+
+    # Beri pesan konfirmasi (opsional, bisa dilihat di log error PHP jika ada)
+    print("<br>Visualisasi pohon berhasil disimpan.<br>")
+
+    # 🖼️ Tambahkan path gambar ke dictionary dataReturn untuk diakses oleh PHP
+    # Kita gunakan path relatif yang bisa diakses dari web
+    web_accessible_path = 'file/visualisasi_pohon.png'
+    dataReturn['tree_visualization_url'] = web_accessible_path
+
+except Exception as e:
+    dataReturn['tree_visualization_url'] = None
+    print(f"<br>Gagal membuat visualisasi pohon: {e}<br>")
+
 
 
 # 9. Menyimpan model Random Forest dan LabelEncoders

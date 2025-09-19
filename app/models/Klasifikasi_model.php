@@ -4,6 +4,8 @@ class Klasifikasi_model
 {
 
     private $db;
+    private $pythonExecutable = '/home/buns/python3.13_env/bin/python'; 
+    private $parthFile = '/var/www/html/rf-grad-predictor/public/file/';
 
     public function __construct()
     {
@@ -34,9 +36,8 @@ class Klasifikasi_model
         // echo $tempFile;
         // echo '<br>';
 
-        // $commandPython = '   ';
-        // $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py ' . escapeshellarg($tempFile);
-        $commandPython = 'python3.13 /var/www/html/rf-grad-predictor/app/models/RF_model.py ' . escapeshellarg($tempFile);
+        // $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py';
+        $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py ' . escapeshellarg($tempFile);
         // $output = shell_exec($commandPython);
         shell_exec($commandPython);
 
@@ -118,7 +119,6 @@ class Klasifikasi_model
 
         // Jalur ke executable Python dan skrip Python Anda
         // $pythonExecutable = 'C:\Users\nabu\AppData\Local\Programs\Python\Python313\python.exe';
-        $pythonExecutable = 'python3.13';
         // $pythonScript = 'C:\xampp\htdocs\rf.kelulusan\app\models\Predict_rf_model.py';
         $pythonScript = '/var/www/html/rf-grad-predictor/app/models/Predict_rf_model.py';
 
@@ -127,7 +127,8 @@ class Klasifikasi_model
         $escapedFilePathArgument = escapeshellarg($tempFile);
 
         // Membangun perintah lengkap
-        $commandPython = $pythonExecutable . ' ' . $pythonScript . ' ' . $escapedFilePathArgument;
+        // $commandPython = $pythonExecutable . ' ' . $pythonScript . ' ' . $escapedFilePathArgument;
+        $commandPython = $this->pythonExecutable  . ' ' . $pythonScript . ' ' . $escapedFilePathArgument;
 
         // --- DEBUGGING: Tampilkan perintah lengkap yang akan dieksekusi ---
         // echo "<strong>3. Perintah lengkap yang dieksekusi:</strong><br>";

@@ -61,11 +61,6 @@
                                     </tr>
 
                                     <tr>
-                                        <td>Lama Studi</td>
-                                        <td><?= $data['mhs']['lama_studi'] ?></td>
-                                    </tr>
-
-                                    <tr>
                                         <td>IP Semester 1</td>
                                         <td><?= $data['mhs']['ip_s1'] ?></td>
                                     </tr>
@@ -85,50 +80,7 @@
                                         <td><?= $data['mhs']['ip_s4'] ?></td>
                                     </tr>
 
-                                    <tr>
-                                        <td>IP Semester 5</td>
-                                        <td><?= $data['mhs']['ip_s5'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 6</td>
-                                        <td><?= $data['mhs']['ip_s6'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 7</td>
-                                        <td><?= $data['mhs']['ip_s7'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 8</td>
-                                        <td><?= $data['mhs']['ip_s8'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 9</td>
-                                        <td><?= $data['mhs']['ip_s9'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 10</td>
-                                        <td><?= $data['mhs']['ip_s10'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 11</td>
-                                        <td><?= $data['mhs']['ip_s11'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 12</td>
-                                        <td><?= $data['mhs']['ip_s12'] ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>IP Semester 13</td>
-                                        <td><?= $data['mhs']['ip_s13'] ?></td>
-                                    </tr>
+                                    
 
                                 </tbody>
                             </table>

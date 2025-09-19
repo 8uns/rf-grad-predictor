@@ -4,8 +4,9 @@ class Klasifikasi_model
 {
 
     private $db;
-    private $pythonExecutable = '/home/buns/python3.13_env/bin/python'; 
-    private $parthFile = '/var/www/html/rf-grad-predictor/public/file/';
+    private $pythonExecutable = '/home/buns/python3.13_env/bin/python3.13';
+    private $pathFiles = '/var/www/html/rf-grad-predictor/public/file/';
+    private $pathModels = '/var/www/html/rf-grad-predictor/app/models/';
 
     public function __construct()
     {
@@ -17,28 +18,18 @@ class Klasifikasi_model
     public function executeRF()
     {
         $start_time = microtime(true);
-        $this->db->query("SELECT prodi, jk, ip_s1, ip_s2, ip_s3, ip_s4, ip_s5, ip_s6, ip_s7, ip_s8, ip_s9, ip_s10, ip_s11, ip_s12, ip_s13, lama_studi, predikat FROM mhs");
+        $this->db->query("SELECT prodi, jk, ip_s1, ip_s2, ip_s3, ip_s4, predikat FROM mhs");
         $data = json_encode($this->db->resultSet());
         $this->db->close();
 
         // Simpan ke file JSON sementara
-        // $tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json';
-        $tempFile = '/var/www/html/rf-grad-predictor/public/file/data.json';
+        $tempFile = $this->pathFiles . 'data.json';
         file_put_contents($tempFile, $data);
-        // echo $tempFile;
 
-        // $output = shell_exec('C:\Users\nabu\AppData\Local\Programs\Python\Python313\python.exe C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py');
-        // echo $output;
-
-
-        // var_dump(function_exists('shell_exec'));
-        // echo shell_exec("python3 --verion");
-        // echo $tempFile;
-        // echo '<br>';
-
-        // $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py';
-        $commandPython = 'python C:\xampp\htdocs\rf.kelulusan\app\models\RF_model.py ' . escapeshellarg($tempFile);
+        $commandPython = $this->pythonExecutable . ' ' . $this->pathModels . 'RF_model.py ' . escapeshellarg($tempFile);
         // $output = shell_exec($commandPython);
+        // echo $commandPython;
+        echo "<br>";
         shell_exec($commandPython);
 
         $end_time = microtime(true);
@@ -53,14 +44,12 @@ class Klasifikasi_model
     public function getResultJson()
     {
         // Read the JSON file
-        // $json = file_get_contents('C:/xampp/htdocs/rf.kelulusan/public/file/dataReturn.json');
-        $json = file_get_contents('/var/www/html/rf-grad-predictor/public/file/dataReturn.json');
+        $json = file_get_contents($this->pathFiles . 'dataReturn.json');
 
         // Check if the file was read successfully
         if ($json === false) {
             die('Error reading the JSON file');
         }
-
 
         // Decode the JSON file
         $json_data = json_decode($json, true);
@@ -77,8 +66,7 @@ class Klasifikasi_model
     public function predictFrom($data)
     {
         // Path ke file JSON sementara
-        // $tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/dataPredict.json';
-        $tempFile = '/var/www/html/rf-grad-predictor/public/file/dataPredict.json';
+        $tempFile = $this->pathFiles . 'dataPredict.json';
 
         // Siapkan data dari input form sesuai format JSON yang diinginkan
         $dataToPredict = [
@@ -88,16 +76,6 @@ class Klasifikasi_model
             "ip_s2" => $data['ip_s2'] ?? '',
             "ip_s3" => $data['ip_s3'] ?? '',
             "ip_s4" => $data['ip_s4'] ?? '',
-            "ip_s5" => $data['ip_s5'] ?? '',
-            "ip_s6" => $data['ip_s6'] ?? '',
-            "ip_s7" => $data['ip_s7'] ?? '',
-            "ip_s8" => $data['ip_s8'] ?? '',
-            "ip_s9" => $data['ip_s9'] ?? '',
-            "ip_s10" => $data['ip_s10'] ?? '',
-            "ip_s11" => $data['ip_s11'] ?? '',
-            "ip_s12" => $data['ip_s12'] ?? '',
-            "ip_s13" => $data['ip_s13'] ?? '',
-            "lama_studi" => $data['lama_studi'] ?? ''
         ];
 
         // Encode array menjadi format JSON tunggal
@@ -118,9 +96,7 @@ class Klasifikasi_model
 
 
         // Jalur ke executable Python dan skrip Python Anda
-        // $pythonExecutable = 'C:\Users\nabu\AppData\Local\Programs\Python\Python313\python.exe';
-        // $pythonScript = 'C:\xampp\htdocs\rf.kelulusan\app\models\Predict_rf_model.py';
-        $pythonScript = '/var/www/html/rf-grad-predictor/app/models/Predict_rf_model.py';
+        $pythonScript = $this->pathModels . 'Predict_rf_model.py';
 
         // Meneruskan jalur file JSON sebagai argumen ke skrip Python
         // Gunakan escapeshellarg untuk memastikan jalur file ditangani dengan benar oleh shell

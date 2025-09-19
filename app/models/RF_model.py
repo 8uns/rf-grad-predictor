@@ -17,6 +17,10 @@ from sklearn.tree import plot_tree
 
 start_total_time = time.perf_counter()
 
+# path file
+pathFiles = '/var/www/html/rf-grad-predictor/public/file/'
+
+
 # print('RF_model.py')
 # Pastikan ada argumen file
 # tempFile = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json'
@@ -45,7 +49,7 @@ dataReturn = dict()
 # print('<br> <br>')
 
 # 1. Membaca dataset dari file JSON
-file_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/data.json'  # Sesuaikan dengan lokasi file
+file_path = pathFiles+'data.json'  # Sesuaikan dengan lokasi file
 with open(file_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
 
@@ -186,7 +190,7 @@ try:
 
     # Tentukan path dan nama file untuk menyimpan gambar
     # Pastikan folder 'file' dapat ditulisi oleh server Anda
-    image_save_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/visualisasi_pohon.png'
+    image_save_path = pathFiles + 'visualisasi_pohon.png'
 
     # Simpan gambar ke file, bukan menampilkannya
     plt.savefig(image_save_path, bbox_inches='tight')
@@ -207,8 +211,8 @@ except Exception as e:
 
 
 # 9. Menyimpan model Random Forest dan LabelEncoders
-model_save_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/random_forest_model.pkl'
-encoders_save_path = 'C:/xampp/htdocs/rf.kelulusan/public/file/label_encoders.pkl'
+model_save_path = pathFiles + 'random_forest_model.pkl'
+encoders_save_path = pathFiles + 'label_encoders.pkl'
 
 try:
     joblib.dump(model, model_save_path)
@@ -253,5 +257,5 @@ dataReturn['execution_time'] = round(end_total_time - start_total_time, 4)
 
 
 # Simpan ke file JSON
-with open("C:/xampp/htdocs/rf.kelulusan/public/file/dataReturn.json", "w", encoding="utf-8") as file:
+with open(pathFiles+"dataReturn.json", "w", encoding="utf-8") as file:
     json.dump(dataReturn, file, indent=4, default=str)

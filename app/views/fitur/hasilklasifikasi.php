@@ -126,7 +126,7 @@
                                                 <th scope="col">IpS2</th>
                                                 <th scope="col">IpS3</th>
                                                 <th scope="col">IpS4</th>
-                                                <th scope="col">IpS5</th>
+                                                <!-- <th scope="col">IpS5</th>
                                                 <th scope="col">IpS6</th>
                                                 <th scope="col">IpS7</th>
                                                 <th scope="col">IpS8</th>
@@ -135,7 +135,7 @@
                                                 <th scope="col">IpS11</th>
                                                 <th scope="col">IpS12</th>
                                                 <th scope="col">IpS13</th>
-                                                <th scope="col">Lama Studi</th>
+                                                <th scope="col">Lama Studi</th> -->
                                                 <th scope="col">Predikat</th>
                                             </tr>
                                         </thead>
@@ -150,16 +150,7 @@
                                                     <td><?= $val['ip_s2'] ?></td>
                                                     <td><?= $val['ip_s3'] ?></td>
                                                     <td><?= $val['ip_s4'] ?></td>
-                                                    <td><?= $val['ip_s5'] ?></td>
-                                                    <td><?= $val['ip_s6'] ?></td>
-                                                    <td><?= $val['ip_s7'] ?></td>
-                                                    <td><?= $val['ip_s8'] ?></td>
-                                                    <td><?= $val['ip_s9'] ?></td>
-                                                    <td><?= $val['ip_s10'] ?></td>
-                                                    <td><?= $val['ip_s11'] ?></td>
-                                                    <td><?= $val['ip_s12'] ?></td>
-                                                    <td><?= $val['ip_s13'] ?></td>
-                                                    <td><?= $val['lama_studi'] ?></td>
+
                                                     <th><?= $val['PREDIKAT'] ?></td>
                                                 </tr>
                                             <?php $i++;
@@ -174,16 +165,7 @@
                                                 <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -309,7 +291,7 @@
                                                 <th scope="col">IpS2</th>
                                                 <th scope="col">IpS3</th>
                                                 <th scope="col">IpS4</th>
-                                                <th scope="col">IpS5</th>
+                                                <!-- <th scope="col">IpS5</th>
                                                 <th scope="col">IpS6</th>
                                                 <th scope="col">IpS7</th>
                                                 <th scope="col">IpS8</th>
@@ -318,7 +300,7 @@
                                                 <th scope="col">IpS11</th>
                                                 <th scope="col">IpS12</th>
                                                 <th scope="col">IpS13</th>
-                                                <th scope="col">Lama Studi</th>
+                                                <th scope="col">Lama Studi</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -332,16 +314,7 @@
                                                     <td><?= $val['ip_s2'] ?></td>
                                                     <td><?= $val['ip_s3'] ?></td>
                                                     <td><?= $val['ip_s4'] ?></td>
-                                                    <td><?= $val['ip_s5'] ?></td>
-                                                    <td><?= $val['ip_s6'] ?></td>
-                                                    <td><?= $val['ip_s7'] ?></td>
-                                                    <td><?= $val['ip_s8'] ?></td>
-                                                    <td><?= $val['ip_s9'] ?></td>
-                                                    <td><?= $val['ip_s10'] ?></td>
-                                                    <td><?= $val['ip_s11'] ?></td>
-                                                    <td><?= $val['ip_s12'] ?></td>
-                                                    <td><?= $val['ip_s13'] ?></td>
-                                                    <td><?= $val['lama_studi'] ?></td>
+
                                                 </tr>
                                             <?php
                                                 if ($i > 20) {
@@ -359,16 +332,7 @@
                                                 <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -453,7 +417,7 @@
                             <div class="row justify-content-md-center">
                                 <div class="col table-responsive">
                                     <h2>
-                                        <?php $accuracy_integer = (int) $data['jsonResult']['accuracy'] ?>
+                                        <?php $accuracy_integer = round($data['jsonResult']['accuracy'], 4) ?>
                                         <?= $accuracy_integer . "(" . ($accuracy_integer * 100 / 1) . "%)" ?>
                                     </h2>
                                 </div>

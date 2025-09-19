@@ -5,8 +5,10 @@ import joblib # Untuk memuat model dan encoders
 import re # Tambahkan import ini untuk regular expression
 
 # --- KONFIGURASI PATH ---
-MODEL_PATH = 'C:/xampp/htdocs/rf.kelulusan/public/file/random_forest_model.pkl'
-ENCODERS_PATH = 'C:/xampp/htdocs/rf.kelulusan/public/file/label_encoders.pkl'
+# MODEL_PATH = 'C:/xampp/htdocs/rf.kelulusan/public/file/random_forest_model.pkl'
+MODEL_PATH = '/var/www/html/rf-grad-predictor/public/file/random_forest_model.pkl'
+# ENCODERS_PATH = 'C:/xampp/htdocs/rf.kelulusan/public/file/label_encoders.pkl'
+ENCODERS_PATH = '/var/www/html/rf-grad-predictor/public/file/label_encoders.pkl'
 
 # --- Fungsi Pembantu untuk Konversi Lama Studi ---
 # Fungsi ini harus sama persis dengan yang digunakan saat melatih model

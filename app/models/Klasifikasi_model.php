@@ -19,6 +19,18 @@ class Klasifikasi_model
     {
         $start_time = microtime(true);
         $this->db->query("SELECT prodi, jk, ip_s1, ip_s2, ip_s3, ip_s4, predikat FROM mhs");
+        // $this->db->query("SELECT prodi, jk, ip_s1, ip_s2, ip_s3, ip_s4, CONVERT( ROUND((ip_s1+ip_s2+ip_s3+ip_s4)/4,2), CHARACTER) ip_avg, predikat FROM mhs");
+        // $this->db->query("SELECT prodi, jk, ip_s1, ip_s2, ip_s3, ip_s4,
+        // CASE
+        // WHEN tahun_masuk % 2 = 0 THEN 1 
+        // ELSE 0                         
+        // END AS tahun_masuk, predikat FROM mhs");
+    //     $this->db->query("SELECT prodi, jk, ip_s1, ip_s2, ip_s3, ip_s4,
+    //     CONVERT( ROUND((ip_s1+ip_s2+ip_s3+ip_s4)/4,2), CHARACTER) ip_avg,
+    //     CASE
+    //     WHEN tahun_masuk % 2 = 0 THEN 1 
+    //     ELSE 0                         
+    // END AS tahun_masuk, predikat FROM mhs");
         $data = json_encode($this->db->resultSet());
         $this->db->close();
 

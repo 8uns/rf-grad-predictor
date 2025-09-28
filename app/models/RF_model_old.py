@@ -55,6 +55,36 @@ df = pd.DataFrame(data)
 # print(df.head())
 # dataReturn['head'] = df.head()
 
+# Membersihkan spasi ekstra dari kolom 'lama_studi'
+if 'lama_studi' in df.columns:
+    df['lama_studi'] = df['lama_studi'].str.strip() # <<< Pastikan baris ini aktif dan berjalan!
+
+    # --- START: Penambahan kode untuk mengkonversi 'lama_studi' ke total bulan ---
+    def convert_lama_studi_to_months(lama_studi_str):
+        # Tangani nilai NaN atau string kosong
+        if pd.isna(lama_studi_str) or str(lama_studi_str).strip() == '':
+            return 0 # Atau None, tergantung bagaimana Anda ingin menangani data hilang
+
+        lama_studi_str = str(lama_studi_str).strip() # Pastikan ini string
+
+        tahun = 0
+        bulan = 0
+
+        # Cari pola "X Tahun"
+        match_tahun = re.search(r'(\d+)\s*Tahun', lama_studi_str, re.IGNORECASE)
+        if match_tahun:
+            tahun = int(match_tahun.group(1))
+
+        # Cari pola "Y Bulan"
+        match_bulan = re.search(r'(\d+)\s*Bulan', lama_studi_str, re.IGNORECASE)
+        if match_bulan:
+            bulan = int(match_bulan.group(1))
+
+        return (tahun * 12) + bulan
+
+    df['lama_studi'] = df['lama_studi'].apply(convert_lama_studi_to_months)
+    # --- END: Penambahan kode untuk mengkonversi 'lama_studi' ke total bulan ---
+
 
 # 3. Cek informasi dataset
 # print("\nInformasi dataset:")
